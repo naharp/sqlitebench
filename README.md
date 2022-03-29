@@ -36,7 +36,7 @@ See any of the subfolder/main.go files for more details.
 
 ## Benchmark
 
-The benchmark was run on KVM Ubuntu 18.04 (Kernel 4.15) with 4 cores of Xeon CPU E7-8870 v4 @ 2.10GHz and 8 GB of RAM.
+The benchmark was run on KVM Ubuntu 18.04 with 4 cores of Xeon CPU E7-8870 v4 @ 2.10GHz and 8 GB of RAM.
 
 The server is started with a configurable number of "connections" to the SQLite database, here called _poolsize_. Once the server is running [hey](https://github.com/rakyll/hey) is used to run the HTTP load test. See `runbenchmark.go` for details.
 

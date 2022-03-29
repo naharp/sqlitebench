@@ -31,7 +31,7 @@ func main() {
 		}
 		w.Write([]byte(`{"id":` + strconv.Itoa(id) + `,"value":` + strconv.Itoa(value) + `}`))
 	})
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := http.ListenAndServe(":4567", nil); err != nil {
 		log.Println(err)
 	}
 }

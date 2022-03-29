@@ -34,7 +34,7 @@ func main() {
 				defer f.Close()
 
 				// Fire 100.000 requests to server
-				hey := heycmd("http://localhost:8080", 100000)
+				hey := heycmd("http://localhost:4567", 100000)
 				stdout, _ := hey.StdoutPipe()
 				go io.Copy(f, stdout)
 				hey.Run()
