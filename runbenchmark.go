@@ -16,7 +16,7 @@ import (
 
 func main() {
 	var (
-		dirs      = []string{"crawshaw", "mattn", "modernc", "zombiezen"}
+		dirs      = []string{"crawshaw", "mattn", "modernc", "tailscale", "zombiezen"}
 		poolsizes = []int{1, 4, 8, 50, 100}
 	)
 
@@ -42,11 +42,17 @@ func main() {
 		}
 	}
 
-	reqsec := regexp.MustCompile(`Requests/sec:\s+(\d+\.\d+)`)
 	tabw := tabwriter.NewWriter(os.Stdout, 0, 8, 0, '\t', 0)
-	fmt.Fprintf(tabw, "package\tpoolsize\treq/sec\n")
+	fmt.Fprint(tabw, "package")
+	for _, poolsize := range poolsizes {
+		fmt.Fprint(tabw, "\trps @ C", poolsize)
+	}
+	fmt.Fprint(tabw, "\n")
+
+	reqsec := regexp.MustCompile(`Requests/sec:\s+(\d+\.\d+)`)
 
 	for _, dir := range dirs {
+		fmt.Fprint(tabw, dir)
 		for _, poolsize := range poolsizes {
 			filename := fmt.Sprintf("result_%s_poolsize_%d.txt", dir, poolsize)
 			data, err := os.ReadFile(filename)
@@ -58,8 +64,9 @@ func main() {
 				log.Fatal(fmt.Sprintf("couldn't find req/sec in %s", filename))
 			}
 
-			fmt.Fprintf(tabw, "%s\t%d\t%s\n", dir, poolsize, segs[1])
+			fmt.Fprintf(tabw, "\t%s", segs[1])
 		}
+		fmt.Fprint(tabw, "\n")
 	}
 	tabw.Flush()
 }

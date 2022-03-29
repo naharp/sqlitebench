@@ -4,6 +4,8 @@ SQLite/HTTP Server Performance Benchmark
 <br /><br />
 </h1>
 
+Forked from [philippta/sqlitebench](github.com/philippta/sqlitebench)
+
 This benchmark provides a overview of the different SQLite driver performances available in Go. For benchmarking a simple HTTP server is used to perform random read queries on the database.
 
 For benchmarking the [hey](https://github.com/rakyll/hey) load generator is used to call the HTTP server (with 50 concurrent requests).
@@ -11,11 +13,12 @@ For benchmarking the [hey](https://github.com/rakyll/hey) load generator is used
 ### Driver Overview
 
 Package | Uses CGo | Is driver for `database/sql`
-:------ | :-----: | :-----:
-crawshaw.io/sqlite | Yes | No
-github.com/mattn/go-sqlite3 | Yes | Yes
-modernc.org/sqlite | No | Yes
-zombiezen.com/go/sqlite | No | No
+:------ |:--------:| :-----:
+crawshaw.io/sqlite |   Yes    | No
+github.com/mattn/go-sqlite3 |   Yes    | Yes
+modernc.org/sqlite |    No    | Yes
+github.com/tailscale/tailscale |   Yes    | Yes
+zombiezen.com/go/sqlite |    No    | No
 
 ## Implementation
 
@@ -42,31 +45,7 @@ All reports of hey can be found in the `result_*.txt` files.
 ## Result
 
 ```
-package    poolsize   req/sec
 
-crawshaw          1     24974
-crawshaw          4     53092
-crawshaw          8     51138
-crawshaw         50     48494
-crawshaw        100     39702
-
-mattn             1     20807
-mattn             4     50185
-mattn             8     39778
-mattn            50     28849
-mattn           100     32546
-
-modernc           1     19209
-modernc           4     41386
-modernc           8     39482
-modernc          50     10169
-modernc         100      7488
-
-zombiezen         1     22829
-zombiezen         4     55161
-zombiezen         8     55505
-zombiezen        50     59762
-zombiezen       100     36622
 ```
 
 ## Observations

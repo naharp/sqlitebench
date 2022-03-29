@@ -5,6 +5,7 @@ go 1.17
 require (
 	crawshaw.io/sqlite v0.3.2
 	github.com/mattn/go-sqlite3 v1.14.8
+	github.com/tailscale/sqlite v0.0.0-20220324172350-a84763d091de
 	modernc.org/sqlite v1.13.1
 	zombiezen.com/go/sqlite v0.7.2
 )
