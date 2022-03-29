@@ -36,19 +36,17 @@ See any of the subfolder/main.go files for more details.
 
 ## Benchmark
 
-The benchmark was run on a MacBook Pro 2020 with a 2.3 GHz Quad-Core Intel Core i7 and 32 GB of RAM.
+The benchmark was run on KVM Ubuntu 4.15 with 4 cores of Xeon CPU E7-8870 v4 @ 2.10GHz and 8 GB of RAM.
 
 The server is started with a configurable number of "connections" to the SQLite database, here called _poolsize_. Once the server is running [hey](https://github.com/rakyll/hey) is used to run the HTTP load test. See `runbenchmark.go` for details.
-
-All reports of hey can be found in the `result_*.txt` files.
 
 ## Result
 
 ```
-
+package         rps @ C1        rps @ C4        rps @ C8        rps @ C50       rps @ C100
+crawshaw        29626.7135      30867.1062      27580.4381      28274.1264      26701.9440
+mattn           28835.1667      27950.9703      28475.7259      28521.1984      28147.3413
+modernc         38659.9235      39049.2933      38437.6926      35588.3684      36337.5995
+tailscale       28172.8906      27527.9857      27229.4827      27325.8529      27974.9314
+zombiezen       32595.6653      35346.5005      35777.0249      36909.9302      40441.6229
 ```
-
-## Observations
-
-- The performance results between the packages do not differ that much.
-- Limiting the number of connections/poolsize to the SQLite database  to roughly the number of CPU cores on the machine gives best performance results.
